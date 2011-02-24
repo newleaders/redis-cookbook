@@ -8,35 +8,35 @@ daemonize yes
 
 # When run as a daemon, Redis write a pid file in /var/run/redis.pid by default.
 # You can specify a custom pid file location here.
-pidfile <%= @node[:redis][:pidfile] %>
+pidfile <%= node[:redis][:pidfile] %>
 
 # Accept connections on the specified port, default is 6379
-port <%= @node[:redis][:port] %>
+port <%= node[:redis][:port] %>
 
 # If you want you can bind a single interface, if the bind option is not
 # specified all the interfaces will listen for connections.
 #
-bind <%= @node[:redis][:bind_address] %>
+bind <%= node[:redis][:bind_address] %>
 
 # Close the connection after a client is idle for N seconds (0 to disable)
-timeout <%= @node[:redis][:timeout] %>
+timeout <%= node[:redis][:timeout] %>
 
 # Set server verbosity to 'debug'
 # it can be one of:
 # debug (a lot of information, useful for development/testing)
 # notice (moderately verbose, what you want in production probably)
 # warning (only very important / critical messages are logged)
-loglevel <%= @node[:redis][:loglevel] %>
+loglevel <%= node[:redis][:loglevel] %>
 
 # Specify the log file name. Also 'stdout' can be used to force
 # the demon to log on the standard output. Note that if you use standard
 # output for logging but daemonize, logs will be sent to /dev/null
-logfile <%= @node[:redis][:logfile] %>
+logfile <%= node[:redis][:logfile] %>
 
 # Set the number of databases. The default database is DB 0, you can select
 # a different one on a per-connection basis using SELECT <dbid> where
 # dbid is a number between 0 and 'databases'-1
-databases <%= @node[:redis][:databases] %>
+databases <%= node[:redis][:databases] %>
 
 ################################ SNAPSHOTTING  #################################
 #
@@ -52,7 +52,7 @@ databases <%= @node[:redis][:databases] %>
 #   after 300 sec (5 min) if at least 10 keys changed
 #   after 60 sec if at least 10000 keys changed
 
-<% @node[:redis][:snapshots].each do |interval, keys| %>
+<% node[:redis][:snapshots].each do |interval, keys| %>
 save <%= interval %> <%= keys %>
 <% end %>
 
@@ -64,10 +64,10 @@ save <%= interval %> <%= keys %>
 #rdbcompression yes
 
 # The filename where to dump the DB
-dbfilename <%= @node[:redis][:dbfilename] %>
+dbfilename <%= node[:redis][:dbfilename] %>
 
 # For default save/load DB in/from the working directory
-dir <%= @node[:redis][:datadir] %>
+dir <%= node[:redis][:datadir] %>
 
 ################################# REPLICATION #################################
 
@@ -76,8 +76,8 @@ dir <%= @node[:redis][:datadir] %>
 # so for example it is possible to configure the slave to save the DB with a
 # different interval, or to listen to another port, and so on.
 #
-<% if @node[:redis][:slaveof] %>
-slaveof <%= @node[:redis][:slaveof] %> <%= @node[:redis][:port] %>
+<% if node[:redis][:slaveof] %>
+slaveof <%= node[:redis][:slaveof] %> <%= node[:redis][:port] %>
 <% else %>
 # slaveof <masterip> <masterport>
 <% end %>
@@ -87,8 +87,8 @@ slaveof <%= @node[:redis][:slaveof] %> <%= @node[:redis][:port] %>
 # starting the replication synchronization process, otherwise the master will
 # refuse the slave request.
 #
-<% if @node[:redis][:slaveof] && @node[:redis][:password] %>
-masterauth <%= @node[:redis][:password] %>
+<% if node[:redis][:slaveof] && node[:redis][:password] %>
+masterauth <%= node[:redis][:password] %>
 <% else %>
 # masterauth <master-password>
 <% end %>
@@ -102,8 +102,8 @@ masterauth <%= @node[:redis][:password] %>
 # This should stay commented out for backward compatibility and because most
 # people do not need auth (e.g. they run their own servers).
 #
-<% if @node[:redis][:master] && @node[:redis][:password] %>
-requirepass <%= @node[:redis][:password] %>
+<% if node[:redis][:master] && node[:redis][:password] %>
+requirepass <%= node[:redis][:password] %>
 <% else %>
 # requirepass foobared
 <% end %>
@@ -135,7 +135,7 @@ requirepass <%= @node[:redis][:password] %>
 # to upgrade. With maxmemory after the limit is reached you'll start to get
 # errors for write operations, and this may even lead to DB inconsistency.
 #
-maxmemory <%= @node[:redis][:max_memory].to_i * 1024 * 1024 %>
+maxmemory <%= node[:redis][:max_memory].to_i * 1024 * 1024 %>
 
 ############################## APPEND ONLY MODE ###############################
 
