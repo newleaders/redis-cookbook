@@ -219,7 +219,7 @@ maxclients <%= node[:redis][:max_clients] %>
 # to upgrade. With maxmemory after the limit is reached you'll start to get
 # errors for write operations, and this may even lead to DB inconsistency.
 #
-maxmemory <%= node[:redis][:max_memory].to_i * 1024 * 1024 %>
+maxmemory <%= node[:redis][:max_memory] %>
 
 # MAXMEMORY POLICY: how Redis will select what to remove when maxmemory
 # is reached? You can select among five behavior:

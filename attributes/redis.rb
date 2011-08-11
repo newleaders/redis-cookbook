@@ -15,7 +15,7 @@ default[:redis][:timeout]                   = 300
 default[:redis][:databases]                 = 16
 default[:redis][:slave_serve_stale_data]    = "yes"
 
-default[:redis][:max_memory]                = 256
+default[:redis][:max_memory]                = 268435456
 default[:redis][:max_memory_policy]         = "volatile-lru"
 default[:redis][:max_memory_samples]        = 3
 default[:redis][:snapshots]                 = {
