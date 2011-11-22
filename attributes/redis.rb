@@ -1,5 +1,5 @@
-default[:redis][:version]                   = "2.2.1"
-default[:redis][:checksum]                  = "a64c32f37e67bdeabbab74f8413a960a8d42e381"
+default[:redis][:version]                   = "2.4.3"
+default[:redis][:checksum]                  = "d917e721a11e38969d92070e9c6476598c6e4621"
 default[:redis][:source]                    = "http://redis.googlecode.com/files/redis-#{redis[:version]}.tar.gz"
 
 default[:redis][:bins]                      = %w(redis-benchmark redis-cli redis-server)
