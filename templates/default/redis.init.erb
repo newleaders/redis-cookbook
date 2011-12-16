@@ -23,6 +23,7 @@ set -e
 start_server() {
   echo -n "Starting $DESC... "
   start-stop-daemon -b --start --user redis -c redis:redis --startas $DAEMON -- <%= node[:redis][:config] %>
+  <%= "chmod a+w #{node[:redis][:unix_socket]}" unless node[:redis][:unix_socket].nil? %>
   echo "done."
 }
 
